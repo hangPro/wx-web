@@ -1,0 +1,119 @@
+@charset "utf-8";
+
+/** 播放录音的动画效果 **/
+@-webkit-keyframes bofang{
+    25% {
+        background-position:-.14rem -.07rem;
+    }
+    50% {
+        background-position:-.63rem -.07rem;
+    }
+    75% {
+        background-position:-1.08rem -.07rem;
+    }
+    100% {
+        background-position:-1.49rem -.07rem;
+    }
+}
+@keyframes bofang{
+    25% {
+        background-position:-.14rem -.07rem;
+    }
+    50% {
+        background-position:-.63rem -.07rem;
+    }
+    75% {
+        background-position:-1.08rem -.07rem;
+    }
+    100% {
+        background-position:-1.49rem -.07rem;
+    }
+}
+.add_yuyin .r_yuyin s.bofang{
+    background:url(./images/yuyin.png) no-repeat -.14rem -.07rem;
+    -webkit-animation:bofang 1s steps(1) infinite;
+    background-size:1.9rem .49rem;
+}
+
+
+
+
+.askinput {
+    margin: .23rem 0;
+    width: 100%;
+    background-color: #fff;
+    height: 2.8rem;
+    overflow: hidden;
+}
+.add_yuyin {
+    border-top: none;
+    height: .5rem;
+    margin-left: 20px;
+    line-height: .5rem;
+    width: 80%;
+    float: left;
+}
+.add_yuyin .r_yuyin {
+    color: #999999;
+    height:100%;
+    min-height: 30px;
+    line-height: .6rem;
+    padding: 0 .2rem;
+    background-color: #a6e65c;
+    border: 1px solid #b3c59e;
+    border-radius: 10px;
+    max-width: 75%;
+    min-width: 18%;
+    position: relative;
+    float: left;
+}
+.add_yuyin .r_yuyin s {
+    width: .4rem;
+    height: .4rem;
+    position: absolute;
+    left: .2rem;
+    top: .09rem;
+    background: url(./images/icon.png) no-repeat -7.11rem -3.62rem;
+    background-size: 14.57rem 4.86rem;
+}
+audio {
+    width: 300px;
+    height: 54px;
+}
+#tx_id{
+    width:8%;
+    float:left;
+}
+#tx_id img{
+    width:100%;
+    border-radius:50%;
+    -webkit-border-radius:50%;
+    -moz-border-radius:50%;
+}
+#bofang_t{
+    margin-left:5px;
+    color: #999999;
+    font-size: 0.2rem;
+}
+.box:before{
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 0;
+    left: 200px;
+    top: 20px;
+    border-right: 10px solid #000;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+}
+.r_yuyin:after{
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 0;
+    left: -0.1rem;
+    top: 0.15rem;
+    border-right: 0.1rem solid #a6e65c;
+    border-top: 0.1rem solid transparent;
+    border-bottom: 0.1rem solid transparent;
+}

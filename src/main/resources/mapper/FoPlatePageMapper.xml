@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hang.common.mapper.FoPlatePageMapper" >
+  <resultMap id="BaseResultMap" type="com.hang.common.domain.FoPlatePage" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="plateId" property="plateid" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="imgUrl" property="imgurl" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, plateId, name, imgUrl, sort, ctime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from fo_plate_page
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from fo_plate_page
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hang.common.domain.FoPlatePage" >
+    insert into fo_plate_page (id, plateId, name,
+      imgUrl, sort, ctime
+      )
+    values (#{id,jdbcType=INTEGER}, #{plateid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+      #{imgurl,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{ctime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hang.common.domain.FoPlatePage" >
+    insert into fo_plate_page
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="plateid != null" >
+        plateId,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="imgurl != null" >
+        imgUrl,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="ctime != null" >
+        ctime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="plateid != null" >
+        #{plateid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="imgurl != null" >
+        #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="ctime != null" >
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hang.common.domain.FoPlatePage" >
+    update fo_plate_page
+    <set >
+      <if test="plateid != null" >
+        plateId = #{plateid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="imgurl != null" >
+        imgUrl = #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="ctime != null" >
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hang.common.domain.FoPlatePage" >
+    update fo_plate_page
+    set plateId = #{plateid,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      imgUrl = #{imgurl,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      ctime = #{ctime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from fo_plate_page
+    WHERE name = #{name,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByList" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    a.*,b.name as plateName
+    from fo_plate_page a,fo_plate b
+    where a.plateId = b.id
+    <if test="search != null">
+      and a.name LIKE CONCAT(CONCAT('%', #{search}),'%')
+    </if>
+    order by a.ctime desc
+  </select>
+  <select id="selectByPlateId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from fo_plate_page
+    <if test="plateId != null">
+      WHERE plateId = #{plateId}
+    </if>
+  </select>
+</mapper>

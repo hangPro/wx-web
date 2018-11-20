@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorator="admin/layout/main">
+
+<div class="bs-example" layout:fragment="content">
+    <div class="bs-center">
+
+        <form id="form1_plate" name="form1_plate" method="post" th:action="@{/admin/plate/upInfo}" class="form-horizontal" enctype="multipart/form-data">
+            <input type="hidden" name="id" id="id" th:value="${foInfo.id}">
+            <div class="form-group">
+                <label for="groupcnt" class="col-sm-2 control-label">群成员人数</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" name="groupcnt" id="groupcnt" placeholder="板块名称" th:value="${foInfo.groupcnt}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description" class="col-sm-2 control-label">板块介绍</label>
+                <div class="col-sm-5">
+                    <textarea class="form-control" id="description" name="description" rows="10" th:text="${foInfo.description}" style="min-width: 90%"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary"> 提 交 &nbsp;<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+
+</div>
+</html>

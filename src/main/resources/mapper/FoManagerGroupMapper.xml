@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hang.common.mapper.FoManagerGroupMapper" >
+  <resultMap id="BaseResultMap" type="com.hang.common.domain.FoManagerGroup" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="gname" property="gname" jdbcType="VARCHAR" />
+    <result column="functioninfo" property="functioninfo" jdbcType="VARCHAR" />
+    <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
+    <result column="childtion" property="childtion" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, gname, functioninfo, ctime, childtion
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from fo_manager_group
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <!--用户组列表，下拉菜单用-->
+  <select id="selectByOption" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from fo_manager_group ORDER BY id ASC
+  </select>
+
+  <!--查询用户组列表 全部 或 search 查询-->
+  <select id="selectByList" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from fo_manager_group
+    <if test="search != null">
+      WHERE gname LIKE CONCAT(CONCAT('%', #{search}),'%')
+    </if>
+    ORDER BY id ASC
+  </select>
+
+  <!--查询管理员分组总数-->
+  <select id="selectByCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    SELECT COUNT(id) as total
+    FROM fo_manager_group
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from fo_manager_group
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hang.common.domain.FoManagerGroup" >
+    insert into fo_manager_group (id, gname, functioninfo, 
+      ctime)
+    values (#{id,jdbcType=INTEGER}, #{gname,jdbcType=VARCHAR}, #{functioninfo,jdbcType=VARCHAR}, 
+      #{ctime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hang.common.domain.FoManagerGroup" >
+    insert into fo_manager_group
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="gname != null" >
+        gname,
+      </if>
+      <if test="functioninfo != null" >
+        functioninfo,
+      </if>
+      <if test="ctime != null" >
+        ctime,
+      </if>
+      <if test="childtion != null" >
+        childtion,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="gname != null" >
+        #{gname,jdbcType=VARCHAR},
+      </if>
+      <if test="functioninfo != null" >
+        #{functioninfo,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null" >
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="childtion != null" >
+        #{childtion,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hang.common.domain.FoManagerGroup" >
+    update fo_manager_group
+    <set >
+      <if test="gname != null" >
+        gname = #{gname,jdbcType=VARCHAR},
+      </if>
+      <if test="functioninfo != null" >
+        functioninfo = #{functioninfo,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null" >
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="childtion != null" >
+        childtion = #{childtion,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hang.common.domain.FoManagerGroup" >
+    update fo_manager_group
+    set gname = #{gname,jdbcType=VARCHAR},
+      functioninfo = #{functioninfo,jdbcType=VARCHAR},
+      ctime = #{ctime,jdbcType=TIMESTAMP},
+      childtion = #{childtion,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
