@@ -44,12 +44,12 @@
                     <!--<img th:src="@{/admin/plate/showImg(fileName=${foPlate.imgurl})}" id="showImg" class='img-responsive center-block'>-->
                 <!--</div>-->
             <!--</div>-->
-            <!--<div class="form-group">-->
-                <!--<label for="uploadfile" class="col-sm-2 control-label">上传图片</label>-->
-                <!--<div class="col-sm-3">-->
-                    <!--<input type="file" name="uploadfile" id="uploadfile" placeholder="上传图片" required=""/>-->
-                <!--</div>-->
-            <!--</div>-->
+            <div class="form-group">
+                <label for="uploadfile" class="col-sm-2 control-label">上传图片</label>
+                <div class="col-sm-3">
+                    <input type="file" name="uploadfile" id="uploadfile" placeholder="上传图片" required=""/>
+                </div>
+            </div>
             <div class="form-group">
                 <label for="sort" class="col-sm-2 control-label">排序</label>
                 <div class="col-sm-2">
@@ -93,6 +93,26 @@
         });
         var plateid = [[${foPlatePage.plateid}]];
         $('#plate_'+plateid).click();
+
+        var imgurl = [[${foPlatePage.imgurl}]];
+        $("#uploadfile").fileinput({
+            language: 'zh',
+            allowedFileExtensions: ["jpg", "png", "gif"],
+            showUpload:false,
+            dropZoneEnabled:false,
+            showClose:false,
+            showCaption: false,
+            initialPreview: [
+                "<img src='/admin/plate/showImg?fileName="+imgurl+"' class='img-responsive center-block'>",
+            ],
+            //overwriteInitial: false, //不覆盖已存在的图片
+            uploadExtraData: function(previewId, index) {   //额外参数的关键点
+
+            }
+        }).on("filebatchuploadsuccess", function(event, data) {	//当上传成功回调函数
+            var response = data.response;
+            console.log(response);
+        });
     })
 
 </script>

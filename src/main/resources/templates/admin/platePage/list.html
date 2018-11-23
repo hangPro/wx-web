@@ -29,9 +29,11 @@
             <thead>
             <tr class="active">
                 <th width="4%">#</th>
-                <th width="20%">板块名称</th>
-                <th width="36%">群名</th>
-                <th width="20%">排序</th>
+                <th width="15%">板块名称</th>
+                <th width="16%">群名</th>
+                <th width="20%">群介绍</th>
+                <th width="5%">排序</th>
+                <th width="20%">图片</th>
                 <th width="12%">录入时间</th>
                 <th width="8%">操作</th>
             </tr>
@@ -42,7 +44,9 @@
                 <th scope="row">[[${vo.id}]]</th>
                 <td>[[${vo.plateName}]]</td>
                 <td>[[${vo.name}]]</td>
+                <td>[[${vo.description}]]</td>
                 <td>[[${vo.sort}]]</td>
+                <td><img th:src="@{/admin/showImg(fileName=${vo.imgurl})}" class="img-responsive center-block" ></td>
                 <td th:text="${#dates.format(vo.getCtime(), 'yyyy-MM-dd hh:mm:ss')}"></td>
                 <td>
                     <a th:href="@{/admin/platePage/upGet(id=${vo.id})}">编辑</a> |

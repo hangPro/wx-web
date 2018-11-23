@@ -9,6 +9,10 @@ public class FoInfo {
 
     private String description;
 
+    private String inviteDesc;
+
+    private String addDesc;
+
     private String imgurl;
 
     private Date ctime;
@@ -27,6 +31,22 @@ public class FoInfo {
 
     public void setGroupcnt(Integer groupcnt) {
         this.groupcnt = groupcnt;
+    }
+
+    public String getAddDesc() {
+        return addDesc;
+    }
+
+    public void setAddDesc(String addDesc) {
+        this.addDesc = addDesc;
+    }
+
+    public String getInviteDesc() {
+        return inviteDesc;
+    }
+
+    public void setInviteDesc(String inviteDesc) {
+        this.inviteDesc = inviteDesc;
     }
 
     public String getDescription() {

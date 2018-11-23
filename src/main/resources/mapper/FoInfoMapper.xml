@@ -5,11 +5,13 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="groupcnt" property="groupcnt" jdbcType="INTEGER" />
     <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="inviteDesc" property="inviteDesc" jdbcType="VARCHAR" />
+    <result column="addDesc" property="addDesc" jdbcType="VARCHAR" />
     <result column="imgUrl" property="imgurl" jdbcType="VARCHAR" />
     <result column="ctime" property="ctime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, groupcnt, description, imgUrl, ctime
+    id, groupcnt, description, inviteDesc, addDesc, imgUrl, ctime
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 

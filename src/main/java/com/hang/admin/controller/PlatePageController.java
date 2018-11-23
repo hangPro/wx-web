@@ -9,6 +9,7 @@ import com.hang.common.service.FoPlateService;
 import com.hang.common.utils.PageUtil;
 import com.hang.common.utils.WebResultUtil;
 import com.hang.utils.PropertieUtils;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +18,12 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
 
@@ -77,7 +81,15 @@ public class PlatePageController {
      * 添加功能
      * */
     @RequestMapping(value = "/platePage/add")
-    public String platePageAdd(ModelMap map, FoPlatePage foPlate){
+    public String platePageAdd(ModelMap map, FoPlatePage foPlate,@RequestParam(value = "uploadfile") MultipartFile file){
+        String fileName = file.getOriginalFilename();
+        //保存
+        try {
+            FileUtils.copyInputStreamToFile(file.getInputStream(),new File(uploadPath, fileName));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        foPlate.setImgurl(fileName);
         boolean result = foPlatePageService.insertSelective(foPlate);
         if(result){
             return WebResultUtil.success(map,"新增成功！","/admin/platePage/list");
@@ -112,8 +124,8 @@ public class PlatePageController {
      * 编辑功能
      * */
     @RequestMapping(value = "/platePage/up")
-    public String up(ModelMap map,FoPlatePage foPlate/*,@RequestParam(value = "uploadfile") MultipartFile file*/){
-        /*
+    public String up(ModelMap map,FoPlatePage foPlate,@RequestParam(value = "uploadfile") MultipartFile file){
+
         String fileName = file.getOriginalFilename();
         //保存
         try {
@@ -122,7 +134,7 @@ public class PlatePageController {
             e.printStackTrace();
         }
         foPlate.setImgurl(fileName);
-        */
+
         int resutl = foPlatePageService.updateByPrimaryKeySelective(foPlate);
         if(resutl == 1) {
             return WebResultUtil.success(map, "板块编辑成功！", "/admin/platePage/list");
